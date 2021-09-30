@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use App\Models\Article;
 
 class ArticlesTableSeeder extends Seeder
 {
@@ -13,20 +14,6 @@ class ArticlesTableSeeder extends Seeder
      */
     public function run()
     {
-        // articlesテーブルにデータをinsert
-        \DB::table('articles')->insert([
-            [
-                'title' => 'タイトル1',
-                'body' => '内容1'
-            ],
-            [
-                'title' => 'タイトル2',
-                'body' => '内容2'
-            ],
-            [
-                'title' => 'タイトル3',
-                'body' => '内容3'
-            ],
-        ]);
+        Article::factory()->count(30)->create();
     }
 }
