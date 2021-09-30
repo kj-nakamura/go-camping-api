@@ -15,9 +15,11 @@ class CreateArticlesTable extends Migration
     {
         Schema::create('articles', function (Blueprint $table) {
             $table->increments('id');
-            // 以下の二行を追加
             $table->string('title');
+            $table->string('address');
+            $table->string('url');
             $table->text('body');
+            $table->unsignedInteger('prefecture_id');
             $table->timestamps();
         });
     }
