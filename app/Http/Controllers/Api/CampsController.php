@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\Api;
 
 use Illuminate\Http\Request;
-use App\Models\Article;
+use App\Models\Camp;
 use App\Http\Controllers\Controller;
 
-class ArticlesController extends Controller
+class CampsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,12 +15,10 @@ class ArticlesController extends Controller
      */
     public function index(Request $request)
     {
-        // $articles = Article::all();
-
         // search
-        $articles = Article::search($request);
+        $camps = Camp::search($request);
 
-        return $articles;
+        return $camps;
     }
 
     /**
@@ -31,11 +29,9 @@ class ArticlesController extends Controller
      */
     public function store(Request $request)
     {
-        $article = new Article;
-        $article->title = $request->title;
-        $article->body = $request->body;
-        $article->save();
-        return redirect('api/articles');
+        Camp::create($request);
+
+        return redirect('api/camps');
     }
 
     /**
@@ -46,8 +42,9 @@ class ArticlesController extends Controller
      */
     public function show($id)
     {
-        $article = Article::find($id);
-        return $article;
+        $camp = Camp::find($id);
+
+        return $camp;
     }
 
     /**
@@ -59,11 +56,14 @@ class ArticlesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $article = Article::find($id);
-        $article->title = $request->title;
-        $article->body = $request->body;
-        $article->save();
-        return redirect("api/articles/" . $id);
+        $camp = Camp::find($id);
+        $camp->title = $request->title;
+        $camp->address = $request->address;
+        $camp->url = $request->url;
+        $camp->body = $request->body;
+        $camp->prefecture_id = $request->prefecture_id;
+        $camp->save();
+        return redirect("api/camps/" . $id);
     }
 
     /**
@@ -74,8 +74,8 @@ class ArticlesController extends Controller
      */
     public function destroy($id)
     {
-        $article = Article::find($id);
-        $article->delete();
-        return redirect('api/articles');
+        $camp = Camp::find($id);
+        $camp->delete();
+        return redirect('api/camps');
     }
 }
